@@ -18,7 +18,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
         <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-3">
           <div className="flex items-center gap-10">
             <Link to="/" aria-label="Restoran Kvaka – početna">
-              <img src={logo.url} alt="Restoran Kvaka" className="h-12 w-auto md:h-14" />
+              <img src={logo.url} alt="Restoran Kvaka" className="h-10 w-auto md:h-12" />
             </Link>
             <nav className="hidden gap-7 font-condensed text-sm uppercase tracking-widest md:flex">
               {nav.map((n) => (
