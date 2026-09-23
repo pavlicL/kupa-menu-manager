@@ -10,33 +10,91 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AdminRouteImport } from './routes/admin'
+import { Route as GalerijaRouteImport } from './routes/galerija'
+import { Route as JelovnikRouteImport } from './routes/jelovnik'
+import { Route as KontaktRouteImport } from './routes/kontakt'
+import { Route as PrijavaRouteImport } from './routes/prijava'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GalerijaRoute = GalerijaRouteImport.update({
+  id: '/galerija',
+  path: '/galerija',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const JelovnikRoute = JelovnikRouteImport.update({
+  id: '/jelovnik',
+  path: '/jelovnik',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const KontaktRoute = KontaktRouteImport.update({
+  id: '/kontakt',
+  path: '/kontakt',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrijavaRoute = PrijavaRouteImport.update({
+  id: '/prijava',
+  path: '/prijava',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/galerija': typeof GalerijaRoute
+  '/jelovnik': typeof JelovnikRoute
+  '/kontakt': typeof KontaktRoute
+  '/prijava': typeof PrijavaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/galerija': typeof GalerijaRoute
+  '/jelovnik': typeof JelovnikRoute
+  '/kontakt': typeof KontaktRoute
+  '/prijava': typeof PrijavaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
+  '/galerija': typeof GalerijaRoute
+  '/jelovnik': typeof JelovnikRoute
+  '/kontakt': typeof KontaktRoute
+  '/prijava': typeof PrijavaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    '/' | '/admin' | '/galerija' | '/jelovnik' | '/kontakt' | '/prijava'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to: '/' | '/admin' | '/galerija' | '/jelovnik' | '/kontakt' | '/prijava'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/galerija'
+    | '/jelovnik'
+    | '/kontakt'
+    | '/prijava'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
+  GalerijaRoute: typeof GalerijaRoute
+  JelovnikRoute: typeof JelovnikRoute
+  KontaktRoute: typeof KontaktRoute
+  PrijavaRoute: typeof PrijavaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +106,51 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/galerija': {
+      id: '/galerija'
+      path: '/galerija'
+      fullPath: '/galerija'
+      preLoaderRoute: typeof GalerijaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/jelovnik': {
+      id: '/jelovnik'
+      path: '/jelovnik'
+      fullPath: '/jelovnik'
+      preLoaderRoute: typeof JelovnikRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/kontakt': {
+      id: '/kontakt'
+      path: '/kontakt'
+      fullPath: '/kontakt'
+      preLoaderRoute: typeof KontaktRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/prijava': {
+      id: '/prijava'
+      path: '/prijava'
+      fullPath: '/prijava'
+      preLoaderRoute: typeof PrijavaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
+  GalerijaRoute: GalerijaRoute,
+  JelovnikRoute: JelovnikRoute,
+  KontaktRoute: KontaktRoute,
+  PrijavaRoute: PrijavaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
