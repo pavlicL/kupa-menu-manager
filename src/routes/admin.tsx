@@ -92,7 +92,7 @@ function MenuEditor() {
     const { error } = await supabase
       .from("menu_categories")
       .insert({ name: newCat.trim(), sort_order: (data?.length ?? 0) + 1 });
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setNewCat("");
     toast.success("Kategorija dodana");
     refresh();
@@ -154,7 +154,7 @@ function CategoryEditor({
 
   const save = async () => {
     const { error } = await supabase.from("menu_categories").update({ name }).eq("id", category.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     setEditing(false);
     onChange();
   };
@@ -164,14 +164,14 @@ function CategoryEditor({
       .from("menu_categories")
       .update({ is_visible: !category.is_visible })
       .eq("id", category.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     onChange();
   };
 
   const remove = async () => {
     if (!confirm(`Obrisati kategoriju "${category.name}" i sva njezina jela?`)) return;
     const { error } = await supabase.from("menu_categories").delete().eq("id", category.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Kategorija obrisana");
     onChange();
   };
@@ -183,7 +183,7 @@ function CategoryEditor({
     const a = supabase.from("menu_categories").update({ sort_order: other.sort_order }).eq("id", category.id);
     const b = supabase.from("menu_categories").update({ sort_order: category.sort_order }).eq("id", other.id);
     const [r1, r2] = await Promise.all([a, b]);
-    if (r1.error || r2.error) return toast.error("Premještanje nije uspjelo");
+    if (r1.error || r2.error) { toast.error("Premještanje nije uspjelo"); return; }
     onChange();
   };
 
@@ -268,14 +268,14 @@ function ItemRow({
 
   const toggle = async () => {
     const { error } = await supabase.from("menu_items").update({ is_visible: !item.is_visible }).eq("id", item.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     onChange();
   };
 
   const remove = async () => {
     if (!confirm(`Obrisati "${item.name}"?`)) return;
     const { error } = await supabase.from("menu_items").delete().eq("id", item.id);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success("Jelo obrisano");
     onChange();
   };
@@ -288,7 +288,7 @@ function ItemRow({
       supabase.from("menu_items").update({ sort_order: other.sort_order }).eq("id", item.id),
       supabase.from("menu_items").update({ sort_order: item.sort_order }).eq("id", other.id),
     ]);
-    if (r1.error || r2.error) return toast.error("Premještanje nije uspjelo");
+    if (r1.error || r2.error) { toast.error("Premještanje nije uspjelo"); return; }
     onChange();
   };
 
@@ -352,7 +352,7 @@ function ItemForm({
   const submit = async (e: FormEvent) => {
     e.preventDefault();
     const p = Number(price.replace(",", "."));
-    if (!name.trim() || Number.isNaN(p)) return toast.error("Unesite naziv i ispravnu cijenu.");
+    if (!name.trim() || Number.isNaN(p)) { toast.error("Unesite naziv i ispravnu cijenu."); return; }
     setBusy(true);
     const payload = {
       name: name.trim(),
@@ -364,7 +364,7 @@ function ItemForm({
       ? await supabase.from("menu_items").update(payload).eq("id", item.id)
       : await supabase.from("menu_items").insert({ ...payload, category_id: categoryId, sort_order: nextOrder });
     setBusy(false);
-    if (error) return toast.error(error.message);
+    if (error) { toast.error(error.message); return; }
     toast.success(item ? "Jelo spremljeno" : "Jelo dodano");
     onDone();
   };
