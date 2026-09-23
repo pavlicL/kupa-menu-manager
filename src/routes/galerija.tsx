@@ -4,7 +4,7 @@ import friedFish from "@/assets/fried-fish.png.asset.json";
 import interior from "@/assets/interior.png.asset.json";
 import wines from "@/assets/kast-wines.png.asset.json";
 import catering from "@/assets/catering.png.asset.json";
-import hero from "@/assets/hero-kupa.jpg";
+import hero from "@/assets/terasa-kupa.png.asset.json";
 
 const title = "Galerija – Restoran Kvaka Karlovac";
 const description =

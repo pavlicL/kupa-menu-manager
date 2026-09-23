@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { MenuList } from "@/components/site/MenuList";
 import { menuQuery } from "@/lib/menu";
-import hero from "@/assets/hero-kupa.jpg";
+import hero from "@/assets/terasa-kupa.png.asset.json";
 import friedFish from "@/assets/fried-fish.png.asset.json";
 import interior from "@/assets/interior.png.asset.json";
 import wines from "@/assets/kast-wines.png.asset.json";
@@ -32,7 +32,7 @@ function Index() {
       {/* Hero */}
       <section className="relative flex h-[70vh] min-h-[480px] items-center justify-center overflow-hidden">
         <img
-          src={hero}
+          src={hero.url}
           alt="Pogled na rijeku Kupu s terase restorana"
           className="absolute inset-0 h-full w-full object-cover"
         />
