@@ -3,7 +3,7 @@ import { Suspense } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { MenuList } from "@/components/site/MenuList";
 import { menuQuery } from "@/lib/menu";
-import hero from "@/assets/hero-kupa.jpg";
+import hero from "@/assets/terasa-kupa.png.asset.json";
 import friedFish from "@/assets/fried-fish.png.asset.json";
 import interior from "@/assets/interior.png.asset.json";
 import wines from "@/assets/kast-wines.png.asset.json";
