@@ -32,7 +32,7 @@ function Index() {
       {/* Hero */}
       <section className="relative flex h-[70vh] min-h-[480px] items-center justify-center overflow-hidden">
         <img
-          src={hero}
+          src={hero.url}
           alt="Pogled na rijeku Kupu s terase restorana"
           className="absolute inset-0 h-full w-full object-cover"
         />
