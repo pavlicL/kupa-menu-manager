@@ -40,10 +40,11 @@ function Index() {
         <div className="relative z-10 px-6 text-center text-river-foreground">
           <p className="eyebrow mb-5 text-river-foreground/90">Restoran Kvaka • Karlovac</p>
           <h1 className="font-serif text-5xl leading-tight drop-shadow-lg md:text-7xl">
-            Okusi tradicije
-            <br />
-            uz rijeku
+            Uz smaragdnu Kupu
           </h1>
+          <p className="mx-auto mt-4 max-w-xl font-serif text-xl italic text-river-foreground/90 drop-shadow md:text-2xl">
+            okus tradicije i vrhunske gastronomije
+          </p>
           <Link
             to="/jelovnik"
             className="mt-10 inline-flex bg-gold px-8 py-3 font-condensed text-base uppercase tracking-widest text-gold-foreground transition-colors hover:bg-gold/90"
