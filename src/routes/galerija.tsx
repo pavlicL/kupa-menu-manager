@@ -23,7 +23,7 @@ export const Route = createFileRoute("/galerija")({
 });
 
 const photos = [
-  { src: hero, alt: "Rijeka Kupa s terase", span: "md:col-span-2" },
+  { src: hero.url, alt: "Rijeka Kupa s terase", span: "md:col-span-2" },
   { src: friedFish.url, alt: "Pržena riba na dasci uz rijeku", span: "md:row-span-2" },
   { src: catering.url, alt: "Catering uz rijeku Kupu", span: "" },
   { src: interior.url, alt: "Unutrašnjost restorana", span: "" },
