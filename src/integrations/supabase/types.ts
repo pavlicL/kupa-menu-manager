@@ -85,6 +85,39 @@ export type Database = {
           },
         ]
       }
+      seasonal_news: {
+        Row: {
+          body: string | null
+          created_at: string
+          id: string
+          image_url: string | null
+          is_visible: boolean
+          sort_order: number
+          title: string
+          updated_at: string
+        }
+        Insert: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_visible?: boolean
+          sort_order?: number
+          title: string
+          updated_at?: string
+        }
+        Update: {
+          body?: string | null
+          created_at?: string
+          id?: string
+          image_url?: string | null
+          is_visible?: boolean
+          sort_order?: number
+          title?: string
+          updated_at?: string
+        }
+        Relationships: []
+      }
       user_roles: {
         Row: {
           id: string
@@ -102,6 +135,83 @@ export type Database = {
           user_id?: string
         }
         Relationships: []
+      }
+      wine_categories: {
+        Row: {
+          created_at: string
+          id: string
+          is_visible: boolean
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          created_at?: string
+          id?: string
+          is_visible?: boolean
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          created_at?: string
+          id?: string
+          is_visible?: boolean
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
+      wines: {
+        Row: {
+          bottle_price: number
+          bottle_size: string
+          category_id: string
+          created_at: string
+          glass_price: number | null
+          glass_size: string | null
+          id: string
+          is_visible: boolean
+          name: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          bottle_price: number
+          bottle_size: string
+          category_id: string
+          created_at?: string
+          glass_price?: number | null
+          glass_size?: string | null
+          id?: string
+          is_visible?: boolean
+          name: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          bottle_price?: number
+          bottle_size?: string
+          category_id?: string
+          created_at?: string
+          glass_price?: number | null
+          glass_size?: string | null
+          id?: string
+          is_visible?: boolean
+          name?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "wines_category_id_fkey"
+            columns: ["category_id"]
+            isOneToOne: false
+            referencedRelation: "wine_categories"
+            referencedColumns: ["id"]
+          },
+        ]
       }
     }
     Views: {
