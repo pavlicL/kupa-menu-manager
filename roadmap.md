@@ -1,0 +1,4 @@
+- [ ] Prikazati vinsku kartu iz poslanih stranica, sa slikama vina.
+- [ ] Dodati sezonske novosti s početnom objavom „Početak soup season” i slikom juhe.
+- [ ] Omogućiti vlasniku uređivanje vinske karte i sezonskih novosti.
+- [ ] Provjeriti prikaz na računalu i mobitelu.
