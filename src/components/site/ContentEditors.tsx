@@ -41,6 +41,7 @@ export function WineEditor() {
 
 function WineCategoryEditor({ category, siblings, index, refresh }: { category: WineCategory; siblings: WineCategory[]; index: number; refresh: () => void }) {
   const [name, setName] = useState(category.name);
+  const [imageUrl, setImageUrl] = useState(category.image_url ?? "");
   const [editing, setEditing] = useState(false);
   const [adding, setAdding] = useState(false);
   const update = async (changes: Partial<WineCategory>) => {
@@ -58,7 +59,7 @@ function WineCategoryEditor({ category, siblings, index, refresh }: { category: 
   };
   return <div className={`border-b border-border pb-8 ${category.is_visible ? "" : "opacity-60"}`}>
     <div className="mb-5 flex flex-wrap items-center justify-between gap-2">
-      {editing ? <div className="flex gap-2"><Input value={name} onChange={(e) => setName(e.target.value)} aria-label="Naziv kategorije" /><Action title="Spremi" onClick={() => { if (name.trim()) { update({ name: name.trim() }); setEditing(false); } }}>✓</Action><Action title="Odustani" onClick={() => { setName(category.name); setEditing(false); }}><X /></Action></div> : <h3 className="font-condensed text-3xl uppercase">{category.name}{!category.is_visible && " (skriveno)"}</h3>}
+      {editing ? <div className="flex flex-1 flex-wrap gap-2"><Input value={name} onChange={(e) => setName(e.target.value)} aria-label="Naziv kategorije" className="max-w-sm" /><Input value={imageUrl} onChange={(e) => setImageUrl(e.target.value)} aria-label="Slika kategorije (URL)" placeholder="URL fotografije (neobavezno)" className="max-w-sm" /><Action title="Spremi" onClick={() => { if (name.trim()) { update({ name: name.trim(), image_url: imageUrl.trim() || null }); setEditing(false); } }}>✓</Action><Action title="Odustani" onClick={() => { setName(category.name); setImageUrl(category.image_url ?? ""); setEditing(false); }}><X /></Action></div> : <h3 className="font-condensed text-3xl uppercase">{category.name}{!category.is_visible && " (skriveno)"}</h3>}
       <div className="flex flex-wrap">
         <Action title="Gore" onClick={() => move(-1)} disabled={index === 0}><ArrowUp /></Action>
         <Action title="Dolje" onClick={() => move(1)} disabled={index === siblings.length - 1}><ArrowDown /></Action>
@@ -67,6 +68,9 @@ function WineCategoryEditor({ category, siblings, index, refresh }: { category: 
         <Action title="Obriši kategoriju" onClick={async () => { if (!confirm(`Obrisati kategoriju „${category.name}” i sva vina?`)) return; const { error } = await supabase.from("wine_categories").delete().eq("id", category.id); if (error) toast.error(error.message); else refresh(); }}><Trash2 /></Action>
       </div>
     </div>
+    {category.image_url && !editing && (
+      <img src={category.image_url} alt={category.name} className="mb-5 aspect-[16/9] w-full max-w-md object-cover" />
+    )}
     <div className="space-y-2">
       {category.wines.map((wine, wineIndex) => <WineRow key={wine.id} wine={wine} siblings={category.wines} index={wineIndex} refresh={refresh} />)}
     </div>

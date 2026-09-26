@@ -8,6 +8,14 @@ export function WineList() {
     <div className="grid gap-x-14 gap-y-14 lg:grid-cols-2">
       {data.filter((category) => category.is_visible).map((category) => (
         <section key={category.id}>
+          {category.image_url && (
+            <img
+              src={category.image_url}
+              alt={category.name}
+              loading="lazy"
+              className="mb-6 aspect-[16/9] w-full object-cover"
+            />
+          )}
           <h2 className="mb-6 border-b-2 border-gold pb-3 font-condensed text-3xl uppercase">{category.name}</h2>
           <div className="space-y-4">
             {category.wines.filter((wine) => wine.is_visible).map((wine) => (

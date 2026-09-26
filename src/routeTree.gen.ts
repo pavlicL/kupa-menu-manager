@@ -15,6 +15,7 @@ import { Route as GalerijaRouteImport } from './routes/galerija'
 import { Route as JelovnikRouteImport } from './routes/jelovnik'
 import { Route as KontaktRouteImport } from './routes/kontakt'
 import { Route as PrijavaRouteImport } from './routes/prijava'
+import { Route as VinskaKartaRouteImport } from './routes/vinska-karta'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -46,6 +47,11 @@ const PrijavaRoute = PrijavaRouteImport.update({
   path: '/prijava',
   getParentRoute: () => rootRouteImport,
 } as any)
+const VinskaKartaRoute = VinskaKartaRouteImport.update({
+  id: '/vinska-karta',
+  path: '/vinska-karta',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -54,6 +60,7 @@ export interface FileRoutesByFullPath {
   '/jelovnik': typeof JelovnikRoute
   '/kontakt': typeof KontaktRoute
   '/prijava': typeof PrijavaRoute
+  '/vinska-karta': typeof VinskaKartaRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -62,6 +69,7 @@ export interface FileRoutesByTo {
   '/jelovnik': typeof JelovnikRoute
   '/kontakt': typeof KontaktRoute
   '/prijava': typeof PrijavaRoute
+  '/vinska-karta': typeof VinskaKartaRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -71,13 +79,27 @@ export interface FileRoutesById {
   '/jelovnik': typeof JelovnikRoute
   '/kontakt': typeof KontaktRoute
   '/prijava': typeof PrijavaRoute
+  '/vinska-karta': typeof VinskaKartaRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    '/' | '/admin' | '/galerija' | '/jelovnik' | '/kontakt' | '/prijava'
+    | '/'
+    | '/admin'
+    | '/galerija'
+    | '/jelovnik'
+    | '/kontakt'
+    | '/prijava'
+    | '/vinska-karta'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/admin' | '/galerija' | '/jelovnik' | '/kontakt' | '/prijava'
+  to:
+    | '/'
+    | '/admin'
+    | '/galerija'
+    | '/jelovnik'
+    | '/kontakt'
+    | '/prijava'
+    | '/vinska-karta'
   id:
     | '__root__'
     | '/'
@@ -86,6 +108,7 @@ export interface FileRouteTypes {
     | '/jelovnik'
     | '/kontakt'
     | '/prijava'
+    | '/vinska-karta'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -95,6 +118,7 @@ export interface RootRouteChildren {
   JelovnikRoute: typeof JelovnikRoute
   KontaktRoute: typeof KontaktRoute
   PrijavaRoute: typeof PrijavaRoute
+  VinskaKartaRoute: typeof VinskaKartaRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -141,6 +165,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrijavaRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/vinska-karta': {
+      id: '/vinska-karta'
+      path: '/vinska-karta'
+      fullPath: '/vinska-karta'
+      preLoaderRoute: typeof VinskaKartaRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -151,6 +182,7 @@ const rootRouteChildren: RootRouteChildren = {
   JelovnikRoute: JelovnikRoute,
   KontaktRoute: KontaktRoute,
   PrijavaRoute: PrijavaRoute,
+  VinskaKartaRoute: VinskaKartaRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

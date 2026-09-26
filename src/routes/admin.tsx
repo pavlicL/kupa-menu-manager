@@ -6,6 +6,7 @@ import { ArrowDown, ArrowUp, Eye, EyeOff, Pencil, Plus, Trash2, X } from "lucide
 import { supabase } from "@/integrations/supabase/client";
 import { useAuth } from "@/lib/useAuth";
 import { menuQuery, formatPrice, type MenuCategory, type MenuItem } from "@/lib/menu";
+import { WineEditor, SeasonalEditor } from "@/components/site/ContentEditors";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
@@ -65,7 +66,11 @@ function AdminPage() {
 
       <main className="mx-auto max-w-5xl px-6 py-10">
         {isAdmin ? (
-          <MenuEditor />
+          <div className="space-y-16">
+            <MenuEditor />
+            <WineEditor />
+            <SeasonalEditor />
+          </div>
         ) : (
           <div className="border border-gold/30 bg-accent/40 p-8">
             <h1 className="font-serif text-2xl">Račun još nema ovlasti za uređivanje</h1>

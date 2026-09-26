@@ -6,6 +6,7 @@ import logo from "@/assets/kvaka-logo.png.asset.json";
 const nav = [
   { to: "/", label: "Početna" },
   { to: "/jelovnik", label: "Jelovnik" },
+  { to: "/vinska-karta", label: "Vinska karta" },
   { to: "/galerija", label: "Galerija" },
   { to: "/kontakt", label: "Kontakt" },
 ] as const;

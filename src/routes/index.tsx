@@ -2,7 +2,9 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { Suspense } from "react";
 import { SiteLayout } from "@/components/site/SiteLayout";
 import { MenuList } from "@/components/site/MenuList";
+import { SeasonalSection } from "@/components/site/SeasonalSection";
 import { menuQuery } from "@/lib/menu";
+import { seasonalQuery } from "@/lib/seasonal";
 import hero from "@/assets/terasa-kupa.png.asset.json";
 import friedFish from "@/assets/fried-fish.png.asset.json";
 import interior from "@/assets/interior.png.asset.json";
@@ -22,7 +24,11 @@ export const Route = createFileRoute("/")({
       { property: "og:description", content: description },
     ],
   }),
-  loader: ({ context }) => context.queryClient.prefetchQuery(menuQuery),
+  loader: ({ context }) =>
+    Promise.all([
+      context.queryClient.prefetchQuery(menuQuery),
+      context.queryClient.prefetchQuery(seasonalQuery),
+    ]),
   component: Index,
 });
 
@@ -97,6 +103,11 @@ function Index() {
           </Link>
         </div>
       </section>
+
+      {/* Seasonal news */}
+      <Suspense fallback={null}>
+        <SeasonalSection />
+      </Suspense>
 
       {/* Atmosphere */}
       <section className="bg-river py-20 text-river-foreground">

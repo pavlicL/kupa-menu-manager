@@ -12,7 +12,7 @@ export type Wine = {
   sort_order: number;
   is_visible: boolean;
 };
-export type WineCategory = { id: string; name: string; sort_order: number; is_visible: boolean; wines: Wine[] };
+export type WineCategory = { id: string; name: string; image_url: string | null; sort_order: number; is_visible: boolean; wines: Wine[] };
 
 export const winesQuery = queryOptions({
   queryKey: ["wines"],
