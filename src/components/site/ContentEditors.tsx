@@ -26,7 +26,10 @@ export function WineEditor() {
     event.preventDefault();
     if (!newCategory.trim()) return;
     const { error } = await supabase.from("wine_categories").insert({ name: newCategory.trim(), sort_order: data.length + 1 });
-    if (error) return toast.error(error.message);
+    if (error) {
+      toast.error(error.message);
+      return;
+    }
     setNewCategory(""); refresh();
   };
   return <section className="space-y-8 border-t-2 border-gold pt-10" id="admin-wines">
@@ -44,7 +47,7 @@ function WineCategoryEditor({ category, siblings, index, refresh }: { category: 
   const [imageUrl, setImageUrl] = useState(category.image_url ?? "");
   const [editing, setEditing] = useState(false);
   const [adding, setAdding] = useState(false);
-  const update = async (changes: Partial<WineCategory>) => {
+  const update = async (changes: Partial<Pick<WineCategory, "name" | "image_url" | "is_visible" | "sort_order">>) => {
     const { error } = await supabase.from("wine_categories").update(changes).eq("id", category.id);
     if (error) toast.error(error.message); else refresh();
   };
@@ -112,7 +115,11 @@ function WineForm({ wine, categoryId, sortOrder, done, cancel }: { wine?: Wine; 
     e.preventDefault();
     const bottle = Number(bottlePrice.replace(",", "."));
     const glass = glassPrice.trim() ? Number(glassPrice.replace(",", ".")) : null;
-    if (!name.trim() || !bottleSize.trim() || !Number.isFinite(bottle) || bottle < 0 || (glass !== null && (!glassSize.trim() || !Number.isFinite(glass) || glass < 0))) return toast.error("Provjerite naziv, veličine i cijene vina.");
+    const valid = name.trim() && bottleSize.trim() && Number.isFinite(bottle) && bottle >= 0 && (glass === null || (glassSize.trim() && Number.isFinite(glass) && glass >= 0));
+    if (!valid) {
+      toast.error("Provjerite naziv, veličine i cijene vina.");
+      return;
+    }
     setBusy(true);
     const payload = { name: name.trim(), bottle_size: bottleSize.trim(), bottle_price: bottle, glass_size: glass === null ? null : glassSize.trim(), glass_price: glass };
     const { error } = wine ? await supabase.from("wines").update(payload).eq("id", wine.id) : await supabase.from("wines").insert({ ...payload, category_id: categoryId, sort_order: sortOrder });
