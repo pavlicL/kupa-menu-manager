@@ -25,6 +25,7 @@ export const winesQuery = queryOptions({
     if (wineError) throw wineError;
     return (categories ?? []).map((category) => ({
       ...category,
+      image_url: (category as { image_url?: string | null }).image_url ?? null,
       wines: (wines ?? []).filter((wine) => wine.category_id === category.id).map((wine) => ({
         ...wine,
         bottle_price: Number(wine.bottle_price),
