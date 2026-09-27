@@ -140,6 +140,7 @@ export type Database = {
         Row: {
           created_at: string
           id: string
+          image_url: string | null
           is_visible: boolean
           name: string
           sort_order: number
@@ -148,6 +149,7 @@ export type Database = {
         Insert: {
           created_at?: string
           id?: string
+          image_url?: string | null
           is_visible?: boolean
           name: string
           sort_order?: number
@@ -156,6 +158,7 @@ export type Database = {
         Update: {
           created_at?: string
           id?: string
+          image_url?: string | null
           is_visible?: boolean
           name?: string
           sort_order?: number
