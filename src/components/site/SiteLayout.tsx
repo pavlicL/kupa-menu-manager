@@ -2,6 +2,8 @@ import { Link } from "@tanstack/react-router";
 import { useState, type ReactNode } from "react";
 import { Menu, X } from "lucide-react";
 import logo from "@/assets/kvaka-logo.png.asset.json";
+import { CONTACT, OPENING_HOURS } from "@/lib/business";
+
 
 const nav = [
   { to: "/", label: "Početna" },
@@ -37,7 +39,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </div>
           <div className="flex items-center gap-3">
             <a
-              href="tel:+38547000000"
+              href={CONTACT.phoneHref}
               className="hidden bg-gold px-6 py-2 font-condensed text-sm uppercase tracking-widest text-gold-foreground transition-colors hover:bg-gold/90 md:inline-flex"
             >
               Rezerviraj stol
@@ -64,7 +66,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
                 {n.label}
               </Link>
             ))}
-            <a href="tel:+38547000000" className="text-gold">
+            <a href={CONTACT.phoneHref} className="text-gold">
               Rezerviraj stol
             </a>
           </nav>
@@ -81,28 +83,33 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           <div>
             <h4 className="mb-3 text-gold">Lokacija</h4>
             <p>
-              Obala rijeke Kupe
+              {CONTACT.street}
               <br />
-              47000 Karlovac
+              {CONTACT.city}
             </p>
           </div>
           <div>
             <h4 className="mb-3 text-gold">Radno vrijeme</h4>
-            <p>
-              Pon – Ned
-              <br />
-              10:00 – 23:00
-            </p>
+            <ul className="space-y-1">
+              {OPENING_HOURS.map((row) => (
+                <li key={row.short} className="flex justify-between gap-3">
+                  <span>{row.short}</span>
+                  <span className={row.hours === "Zatvoreno" ? "text-foreground/40" : ""}>
+                    {row.hours}
+                  </span>
+                </li>
+              ))}
+            </ul>
           </div>
           <div>
             <h4 className="mb-3 text-gold">Kontakt</h4>
             <p>
-              <a href="tel:+38547000000" className="hover:text-gold">
-                +385 47 000 000
+              <a href={CONTACT.phoneHref} className="hover:text-gold">
+                {CONTACT.phoneDisplay}
               </a>
               <br />
-              <a href="mailto:info@restoran-kvaka.hr" className="hover:text-gold">
-                info@restoran-kvaka.hr
+              <a href={`mailto:${CONTACT.email}`} className="hover:text-gold">
+                {CONTACT.email}
               </a>
             </p>
           </div>
